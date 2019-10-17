@@ -1,0 +1,19 @@
+Private Sub CommandButton1_Click()
+Dim mindistance As Double
+Dim i, currentrow As Integer
+Worksheets("model").Select 
+' excel sheet takes care of min distance extraction, min distance finding and centre allocation
+For i = 1 To 50
+    Range("O2:T4").Select 'How to copy values to a cell
+    Selection.Copy
+    Range("G2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    mindistance = Range("P7").Value
+    currentrow = 14 + i
+    Worksheets("model").Cells(currentrow, 24).Value = mindistance   'captures minimum distance
+    Worksheets("model").Cells(currentrow, 23).Value = i
+
+Next i
+      
+End Sub
