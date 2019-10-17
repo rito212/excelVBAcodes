@@ -1,0 +1,30 @@
+Private Sub CommandButton3_Click()
+Application.ScreenUpdating = False
+
+Dim copy, rowstart, currentrow, nobranches As Integer
+Dim copy2 As Double
+
+nobranches = Worksheets("model").Cells(3, 4).Value
+
+rowstart = 5
+
+For i = 1 To nobranches
+currentrow = rowstart + i
+copy = Worksheets("model").Cells(currentrow, 2).Value
+Worksheets("Input").Select
+Worksheets("Input").Cells(2, 4).Value = copy
+
+Worksheets("output").Select
+copy2 = Worksheets("output").Cells(2, 3).Value
+Worksheets("model").Select
+Worksheets("model").Cells(currentrow, 21).Value = copy2
+
+Worksheets("output").Select
+copy2 = Worksheets("output").Cells(2, 8).Value
+Worksheets("model").Select
+Worksheets("model").Cells(currentrow, 26).Value = copy2
+
+Next i
+
+Application.ScreenUpdating = True
+End Sub
