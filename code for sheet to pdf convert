@@ -1,0 +1,31 @@
+Private Sub CommandButton1_Click()
+Dim UserID, Name, ReportName As String
+Dim NID As Integer
+Worksheets("printreport").Activate
+NID = Worksheets("printreport").Cells(12, 3).Value
+
+For i = 1 To NID
+ Worksheets("printreport").Activate
+ UserID = Worksheets("printreport").Cells(14 + i, 2).Value
+ 
+ Worksheets("Choose Candidate").Activate
+ Worksheets("Choose Candidate").Cells(7, 10).Value = UserID
+ Name = Worksheets("Choose Candidate").Cells(9, 10).Value
+ 
+ ReportName = ThisWorkbook.Path & "\" & UserID & "_" & Name
+ 
+ Worksheets("Report").Activate
+ ActiveSheet.ExportAsFixedFormat _
+ Type:=xlTypePDF, _
+ Filename:=ReportName, _
+ IncludeDocProperties:=False, _
+ IgnorePrintAreas:=False, _
+ From:=1, _
+ To:=4, _
+ OpenAfterPublish:=False
+  
+Next i
+
+Worksheets("printreport").Activate
+
+End Sub
